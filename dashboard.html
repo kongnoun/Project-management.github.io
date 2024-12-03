@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- Google-Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=League+Spartan:wght@100..900&family=Lilita+One&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Shrikhand&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: url(src/img/background3.jpeg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: 'Arial', sans-serif;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 auto;
+            max-width: 1200px;
+            padding: 0;
+            gap: 15px;
+        }
+
+        .sidebar {
+            background: rgba(255, 255, 255, 0.1);
+            padding-top: 14px;
+            padding-bottom: 14px;
+            padding-left: 8px;
+            padding-right: 8px;
+            border-radius: 15px;
+            width: 50%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(6px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sidebar .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 16px;
+            margin-bottom: 20px;
+            background-color: rgb(61, 61, 61, 0.5);
+            border-radius: 14px;
+            padding: 14px;
+            color: white;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .sidebar .profile img {
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            margin-bottom: 10px;
+
+        }
+
+        .sidebar a {
+            color: #ffffff;
+            text-decoration: none;
+            font-family: 'League spartan';
+            font-weight: bold;
+            font-size: 18px;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 10px;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #2b419a;
+            color: white;
+        }
+
+        .main-content {
+            background: rgba(92, 92, 92, 0.3);
+            margin-left: 10px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(6px);
+            width: 70%;
+            height: 100%;
+        }
+
+        .main-content h2 {
+            color: white;
+            font-family: 'League spartan';
+            font-weight: bold;
+            margin-top: 16px;
+        }
+
+        .category-box {
+            background-color: rgb(0, 0, 0, 0.4);
+            border: rgb(35, 35, 35);
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 7px;
+            text-align: center;
+            flex-grow: 1;
+            transition: all 0.3s ease;
+        }
+
+        .category-box h5 {
+            font-family: 'League spartan';
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: rgb(241, 241, 241);
+        }
+
+        .category-box p {
+            font-family: 'League spartan';
+            font-weight: bold;
+            color: rgb(201, 201, 201);
+        }
+
+        .category-box:hover {
+            transform: translateY(-5px);
+            background: #4c4c94;
+        }
+
+        .category-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .category-container div {
+            flex: 1;
+        }
+
+        .project-list {
+            padding: 8px;
+            margin-top: 20px;
+        }
+
+        .project-list h5 {
+            font-family: 'League Spartan';
+            font-weight: bold;
+            opacity: 0.8;
+            color: white;
+        }
+
+        /* Scrollable project list */
+        .project-list ul {
+            padding: 8px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 13px;
+            height: 200px; /* Fixed height for scrollable area */
+            list-style-type: none;
+            padding: 0;
+            overflow-y: auto; /* Enable vertical scrolling */
+        }
+
+        .project-list ul::-webkit-scrollbar {
+            width: 8px; /* Scrollbar width */
+        }
+
+        .project-list ul::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1); /* Scrollbar track */
+            border-radius: 10px;
+        }
+
+        .project-list ul::-webkit-scrollbar-thumb {
+            background: rgba(92, 92, 92, 0.6); /* Scrollbar thumb */
+            border-radius: 10px;
+        }
+
+        .project-list li {
+            background: #3d3c3c;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+
+        .btn-primary {
+            margin-top: 30px;
+            padding: 12px;
+            background-color: #6363ac;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background-color: #1c1d1d;
+        }
+
+        .side-content {
+            background: rgb(255, 255, 255, 0.1);
+            margin-left: 10px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 45%;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: start;
+        }
+
+        .form-label {
+            color: white;
+        }
+
+        .form-control {
+            background-color: rgb(95, 95, 95);
+            border: rgb(35, 35, 35);
+        }
+
+        .dot-container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+            height: 20px;
+            position: absolute;
+            padding-left: 14px;
+            border-top-right-radius: 15px;
+            border-top-left-radius: 15px;
+            top: 0;
+            left: 0;
+            background-color: #4c4c94;
+            gap: 8px;
+            overflow: hidden;
+        }
+
+        .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background-color: #ff5f57; /* Red (macOS) */
+            transition: background-color 0.3s;
+        }
+
+        .dot:nth-child(2) {
+            .dot-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background-color: #ff5f57; /* Red (macOS) */
+            transition: background-color 0.3s;
+        }
+
+        .dot:nth-child(2) {
+            background-color: #ffbd2e; /* Orange (macOS) */
+        }
+
+        .dot:nth-child(3) {
+            background-color: #27c93f; /* Green (macOS) */
+        }
+            }
+
+        .dot:nth-child(3) {
+            background-color: #27c93f; /* Green (macOS) */
+        }
+
+        form h2 {
+            color: white;
+            font-weight: bold;
+
+        }
+
+        .form-control {
+            color: white;
+        }
+
+        @media (max-width: 940px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .main-content {
+                width: 100%;
+            }
+
+            .side-content {
+                width: 100%;
+            }
+
+            .category-container {
+                flex-direction: column;
+            }
+
+            .category-box {
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container d-flex justify-content-center align-items-center">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="dot-container">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <div class="profile">
+                <img src="src/img/img1.png" alt="Admin">
+                <div>Admin: Morax</div>
+                <div>Administrator</div>
+            </div>
+            <a href="dashboard.html"><i class="fa fa-tachometer" aria-hidden="true" style="margin-right: 6px;"></i>Dashboard</a>
+            <a href="forms.html"><i class="fa fa-plus-square" aria-hidden="true" style="margin-right: 6px;"></i>Add New Project</a>
+            <a href="index.html"><i class="fa fa-sign-out" aria-hidden="true" style="margin-right: 6px;"></i>Logout</a>
+
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="dot-container">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <h2>Project Categories</h2>
+            <div class="category-container">
+                <div class="category-box">
+                    <h5 class="text-uppercase">Ongoing</h5>
+                    <p id="ongoingCount">0 Projects</p>
+                </div>
+                <div class="category-box">
+                    <h5 class="text-uppercase">Completed</h5>
+                    <p id="completedCount">0 Projects</p>
+                </div>
+                <div class="category-box">
+                    <h5 class="text-uppercase">Pending</h5>
+                    <p id="pendingCount">0 Projects</p>
+                </div>
+            </div>
+
+            <div class="project-list">
+                <h5>Projects List</h5>
+                <ul id="projectList">
+                    <!-- Projects will be dynamically listed here -->
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Side Content (Add Project Form) -->
+        <div class="side-content">
+            <div class="container">
+                <form id="projectForm">
+                    <h2>Add New Project</h2>
+                    <div class="mb-3">
+                        <label for="projectName" class="form-label">Project Name</label>
+                        <input type="text" class="form-control" id="projectName" placeholder="Enter name" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="projectCategory" class="form-label">Category</label>
+                        <select class="form-control" id="projectCategory">
+                            <option value="Ongoing">Ongoing</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Pending">Pending</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="projectDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="projectDescription" rows="3" placeholder="Descriptions"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Save Project</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+        <script>
+            // Initialize project list from localStorage
+            let projects = JSON.parse(localStorage.getItem("projects")) || [];
+
+            // Function to update the dashboard with project counts
+            function updateDashboard() {
+                let ongoingCount = projects.filter(p => p.category === "Ongoing").length;
+                let completedCount = projects.filter(p => p.category === "Completed").length;
+                let pendingCount = projects.filter(p => p.category === "Pending").length;
+
+                document.getElementById("ongoingCount").innerText = `${ongoingCount} Projects`;
+                document.getElementById("completedCount").innerText = `${completedCount} Projects`;
+                document.getElementById("pendingCount").innerText = `${pendingCount} Projects`;
+
+                // Update project list with delete functionality
+                const projectList = document.getElementById("projectList");
+                projectList.innerHTML = "";
+                projects.forEach((project, index) => {
+                    const li = document.createElement("li");
+                    li.innerHTML = `${project.name} - ${project.category} 
+                        <button class="btn btn-danger btn-sm" onclick="deleteProject(${index})">Delete</button>`;
+                    projectList.appendChild(li);
+                });
+            }
+
+            // Handle form submission to add a project
+            document.getElementById("projectForm").addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                const projectName = document.getElementById("projectName").value;
+                const projectCategory = document.getElementById("projectCategory").value;
+                const projectDescription = document.getElementById("projectDescription").value;
+
+                const newProject = {
+                    name: projectName,
+                    category: projectCategory,
+                    description: projectDescription
+                };
+
+                // Add new project to the projects array and update localStorage
+                projects.push(newProject);
+                localStorage.setItem("projects", JSON.stringify(projects));
+
+                // Redirect to dashboard
+                window.location.href = "dashboard.html";
+            });
+
+            // Delete project from list
+            function deleteProject(index) {
+                projects.splice(index, 1);
+                localStorage.setItem("projects", JSON.stringify(projects));
+                updateDashboard();
+            }
+
+            // Call updateDashboard on page load to display projects and counts
+            document.addEventListener("DOMContentLoaded", updateDashboard);
+
+
+
+            document.addEventListener("DOMContentLoaded", function () {
+                    gsap.from(".sidebar", {
+                        duration: 1,
+                        y: 50,
+                        scale: 0.9, 
+                        opacity: 0, 
+                        ease: "power2.out",
+                        delay: 0.2 
+                    });
+
+                    gsap.from(".main-content", {
+                        duration: 1.4,
+                        y: 50, 
+                        scale: 0.95, 
+                        opacity: 0,
+                        ease: "power2.out", 
+                        delay: 0.4 
+                    });
+
+                    gsap.from(".side-content", {
+                        duration: 1.2,
+                        y: 50, 
+                        scale: 0.95, 
+                        opacity: 0, 
+                        ease: "power2.out", 
+                        delay: 0.3
+                    });
+                });
+
+        </script>
+
+</body>
+
+</html>
