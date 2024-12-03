@@ -1,6 +1,6 @@
 # 📋 **Project Management Dashboard**  
 
-![Project Management Banner](./src/img/photo1.png)
+![Project Management Banner](https://startinfinity.s3.us-east-2.amazonaws.com/production/blog/post/5/main/1SvzKctRCi8bwB0QPdOZkBP0pRhsOqZpl0wjs6y0.png)
 
 > **Your one-stop solution for managing ongoing and completed projects!**  
 > _A sleek and efficient React-based project management system with intuitive UI and dynamic features._
