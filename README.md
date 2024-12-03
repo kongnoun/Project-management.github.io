@@ -1,6 +1,6 @@
 # 📋 **Project Management Dashboard**  
 
-![Project Management Banner]([src/img/photo1.png](https://github.com/kongnoun/Project-management.github.io/blob/e9d40089bf318d40e31d10e702a81ff801289336/src/photo1.png))
+![Project Management Banner](./src/img/photo1.png)
 
 > **Your one-stop solution for managing ongoing and completed projects!**  
 > _A sleek and efficient React-based project management system with intuitive UI and dynamic features._
